@@ -1,5 +1,7 @@
 This repository contains the current implementation of the code for approximating the solutions to the BVP associated to the Euler Elastica.
 
+The mathematical description of the implemented procedure is in the PDF file [Mathematical description](NeuralNetworkSolvingBVP.pdf).
+
 The organisation of the repository is as follows:
 - *testDerivative.ipynb* : this is a notebook showing how to implement the derivative of a function using forward automatic differentiation
 - *generated_data.txt* : is the text file containing the training and test data points
