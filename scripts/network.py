@@ -74,11 +74,13 @@ class approximate_curve(nn.Module):
         #find the coefficients a_0,a_1,a_2,a_3
         def get_coefficients(self,q1,q2,v1,v2):
           B = len(q1)
-          q1n,q2n,v1n,v2n = self.normalize(q1,q2,v1,v2)
           left_node = torch.zeros((B,1),dtype=torch.float32).to(q1.device)
           right_node = torch.ones((B,1),dtype=torch.float32).to(q1.device)
-
-          q = lambda s : self.parametric_part(s,q1n,q2n,v1n,v2n) #.reshape(-1,2)[0] tolto quando abbiamo riscritto gp_left &co
+          if self.is_norm:
+            q1n,q2n,v1n,v2n = self.normalize(q1,q2,v1,v2)
+            q = lambda s : self.parametric_part(s,q1n,q2n,v1n,v2n) #.reshape(-1,2)[0] tolto quando abbiamo riscritto gp_left &co
+          else:
+            q = lambda s : self.parametric_part(s,q1,q2,v1,v2) #.reshape(-1,2)[0] tolto quando abbiamo riscritto gp_left &co
           
           g_left = q(left_node) 
           g_right = q(right_node)
